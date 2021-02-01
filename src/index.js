@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -7,9 +8,6 @@ import reportWebVitals from './reportWebVitals'
 ReactDOM.render(
   <React.StrictMode>
     <head>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-        crossOrigin="anonymous"/>
     </head>
     <App />
   </React.StrictMode>,
