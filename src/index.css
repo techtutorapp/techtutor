@@ -1,10 +1,37 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Open+Sans:wght@600;1&display=swap');
+
+.navbar {
+  background-color: rgb(92, 204, 226);
+}
+
+a.navbar-brand {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: white !important;
+}
+
+body, a.nav-link, a.nav-item {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans' sans-serif;
+  font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar .navbar-nav {
+  padding: 1rem;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+  justify-content: center;
+}
+
+a.nav-link {
+  color: white !important;
 }
 
 code {
