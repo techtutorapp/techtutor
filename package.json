@@ -9,6 +9,13 @@
     "build": "gatsby build"
   },
   "dependencies": {
+    "@chakra-ui/gatsby-plugin": "^1.0.2",
+    "@chakra-ui/icons": "^1.0.7",
+    "@chakra-ui/react": "^1.4.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^4",
+    "fs": "^0.0.1-security",
     "gatsby": "^2.18.18",
     "gatsby-theme-codebushi": "1.0.0",
     "react": "^16.12.0",
