@@ -1,7 +1,7 @@
-import React from 'react';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
-import LogoIcon from '../../svg/LogoIcon';
-import Button from '../Button';
+import React from 'react'
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+import LogoIcon from '../../svg/LogoIcon'
+import Button from '../Button'
 
 const Header = () => (
   <header className="sticky top-0 bg-white shadow">
@@ -14,7 +14,7 @@ const Header = () => (
       </div>
       <div className="flex mt-4 sm:mt-0">
         <AnchorLink className="px-4" href="#features">
-          About 
+          About
         </AnchorLink>
         <AnchorLink className="px-4" href="#services">
           Courses
@@ -28,6 +28,6 @@ const Header = () => (
       </div>
     </div>
   </header>
-);
+)
 
-export default Header;
+export default Header
