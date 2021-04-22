@@ -11,12 +11,11 @@ function Slide (props) {
 }
 
 Slide.propTypes = {
-  className: String,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-    PropTypes.func
-  ])
+  className: PropTypes.string,
+  passFn: PropTypes.func, // function
+  setSlide: PropTypes.func, // function
+  i: PropTypes.number, // integer
+  children: PropTypes.node // component or list of components
 }
 
 export default Slide
