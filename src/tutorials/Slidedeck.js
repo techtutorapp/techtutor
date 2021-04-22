@@ -1,28 +1,31 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Box, ButtonGroup, Grid, IconButton, GridItem } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { css } from '@emotion/react'
 import { withResizeDetector } from 'react-resize-detector'
 import ChromeLg from '../svg/ChromeLg'
-import ChromeMed from '../svg/ChromeMed'
+// import ChromeMed from '../svg/ChromeMed'
 
 const window = css`
   border-radius: 0 0 10px 10px;
 `
 
-const AdaptiveHeader = ({ width }) => {
-  useEffect(() => {
-    let chrome = <ChromeLg />
-    if (width >= 768) {
-      chrome = <ChromeLg />
-    } else if (width >= 480) {
-      chrome = <ChromeMed />
-    } else {
-      chrome = <ChromeMed />
-    }
-    return chrome
-  })
+// Supposed to handle responsive header reandering but not working yet lol
+// const AdaptiveHeader = ({ width }) => {
+// useEffect(() => {
+//   let chrome = <ChromeLg />
+//   if (width >= 768) {
+//     chrome = <ChromeLg />
+//   } else if (width >= 480) {
+//     chrome = <ChromeMed />
+//   } else {
+//     chrome = <ChromeMed />
+//   }
+//   return chrome
+// })
+const AdaptiveHeader = () => {
+  return <ChromeLg />
 }
 
 const ChromeWithDetector = withResizeDetector(AdaptiveHeader)
@@ -30,21 +33,17 @@ const ChromeWithDetector = withResizeDetector(AdaptiveHeader)
 const Slidedeck = (props) => {
   const containerRef = useRef()
 
-  // Create initial array of passed
-  const initPassed = []
-  for (let i = 0; i < props.children.length; i++) { initPassed.push(false) }
-
-  // boolean[] array denotes which slides are finished
-  const [passed, setPassed] = useState(initPassed)
+  // Represents the largest index reached
+  const [passed, setPassed] = useState(0)
 
   /**
    * Marks a slide as completed and able to be advanced
-   * @param {number} index index of slide to be marked as complete
+   * @param {number} i index of slide to be marked as complete
    */
-  const passIndex = index => {
-    const clone = [...passed]
-    clone[index] = true
-    setPassed(clone)
+  const passIndex = (i) => {
+    if (i >= passed) {
+      setPassed(i + 1)
+    }
   }
 
   // Create state with current index and the slides which may have been changed
@@ -111,7 +110,7 @@ const Slidedeck = (props) => {
             aria-label='Advance slide'
             colorScheme='teal'
             icon={<ArrowForwardIcon/>}
-            disabled={!passed[index]}
+            disabled={!(index < passed)}
             onClick={() => { shiftIndex(1) }}>
           </IconButton>
         </ButtonGroup>

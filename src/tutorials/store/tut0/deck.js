@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Form, Field } from 'formik'
 import { Button, FormControl, FormHelperText, FormLabel, Heading, Input } from '@chakra-ui/react'
@@ -23,16 +23,14 @@ const SlideProps = {
   passFn: PropTypes.func, // function
   setSlide: PropTypes.func, // function
   i: PropTypes.number, // integer
-  children: PropTypes.node // component or list of components
+  children: PropTypes.node, // component or list of components
+  state: PropTypes.object
 }
 
 const Deck = (props) => <>
   <Slidedeck courseId='test0'>
     <Slide1 />
-    <Slide>
-      {p => { p.passFn(p.i) }}
-      The second slide which was not previously accessible
-    </Slide>
+    <Slide2 />
     <Slide>
       Third slide
     </Slide>
@@ -82,6 +80,16 @@ const Slide1 = (props) => {
   </Slide>
 }
 
+const Slide2 = (props) => {
+  useEffect(() => {
+    props.passFn(props.i)
+  })
+  return <Slide>
+    The second slide which was not previously accessible. You can go straight to the next slide without clicking anything!<br />See Slide2 in <code>~/src/tutorials/store/tut0/deck.js</code> to see how to do that.
+</Slide>
+}
+
 Slide1.propTypes = SlideProps
+Slide2.propTypes = SlideProps
 
 export default Deck
