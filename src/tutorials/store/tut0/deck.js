@@ -15,16 +15,19 @@ import Slide from '../../Slide'
  *
  * Call props#passFn(props.i) when the slide is complete and the user can move on.
  *
- * If you need to change a slide (e.g. dynamically generate next slide based on input)
- * use props#setSlide(targetIndex, newSlideComponent)
+ * If you need to change a slide (e.g. dynamically generate next slide based on
+ * input), use props#setSlide(targetIndex, newSlideComponent)
  */
 
+/**
+ * Unforunately no in-component intellisense bc that would require typescript :(
+ */
 const SlideProps = {
   passFn: PropTypes.func, // function
   setSlide: PropTypes.func, // function
   i: PropTypes.number, // integer
   children: PropTypes.node, // component or list of components
-  state: PropTypes.object
+  state: PropTypes.object // TODO: implement state persistence
 }
 
 const Deck = (props) => <>
@@ -81,9 +84,16 @@ const Slide1 = (props) => {
 }
 
 const Slide2 = (props) => {
+  /**
+   * This useEffect hook will immediately mark this slide as passed after its
+   * been rendered once. That means the user can go back to a previous slide
+   * and still be free to move to this one again, even though the user didn't
+   * interact.
+  */
   useEffect(() => {
     props.passFn(props.i)
   })
+
   return <Slide>
     The second slide which was not previously accessible. You can go straight to the next slide without clicking anything!<br />See Slide2 in <code>~/src/tutorials/store/tut0/deck.js</code> to see how to do that.
 </Slide>
