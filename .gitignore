@@ -2,6 +2,7 @@
 .env.development
 
 public/
+.vscode/
 
 # Logs
 logs
