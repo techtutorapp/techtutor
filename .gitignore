@@ -1,6 +1,9 @@
 .env.production
 .env.development
 
+public/
+.vscode/
+
 # Logs
 logs
 *.log
@@ -72,3 +75,4 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 yarn.lock
+.vscode/settings.json
