@@ -1,12 +1,12 @@
-import { Container } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
-import Tutorial from '../tutorials/store/Tutorial1/deck'
+import Tutorial from '../tutorials/store/tut0/deck'
 
 const Test = props => {
   return (
-    <Container maxW='container.md' pt='5'>
+    <Box pt='5' alignContent='center' justifyContent='center'>
       <Tutorial/>
-    </Container>
+    </Box>
   )
 }
 
