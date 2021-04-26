@@ -1,10 +1,3 @@
 module.exports = {
-  plugins: [
-    {
-      resolve: `gatsby-theme-codebushi`,
-      options: {
-        tailwindConfig: `tailwind.config.js`
-      }
-    }
-  ]
-};
+  plugins: ['gatsby-plugin-react-helmet', '@chakra-ui/gatsby-plugin']
+}
