@@ -1,5 +1,3 @@
 module.exports = {
-  plugins: [
-    '@chakra-ui/gatsby-plugin'
-  ]
+  plugins: ['gatsby-plugin-react-helmet', '@chakra-ui/gatsby-plugin']
 }

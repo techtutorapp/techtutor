@@ -74,5 +74,5 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
-yarn.lock
+
 .vscode/settings.json
