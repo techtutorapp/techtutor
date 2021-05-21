@@ -15,7 +15,8 @@ Slide.propTypes = {
   passFn: PropTypes.func, // function
   setSlide: PropTypes.func, // function
   i: PropTypes.number, // integer
-  children: PropTypes.node // component or list of components
+  children: PropTypes.node, // component or list of components
+  logTest: PropTypes.func
 }
 
 export default Slide

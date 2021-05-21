@@ -4,7 +4,7 @@ import { Box, ButtonGroup, Grid, IconButton, GridItem } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { css } from '@emotion/react'
 import { withResizeDetector } from 'react-resize-detector'
-import ChromeLg from '../svg/ChromeLg'
+import ChromeLg from '../../svg/ChromeLg'
 // import ChromeMed from '../svg/ChromeMed'
 
 const window = css`
@@ -60,7 +60,7 @@ const Slidedeck = (props) => {
     }
 
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { passFn: passIndex, setSlide: setSlide, i })
+      return React.cloneElement(child, { passFn: passIndex, setSlide: setSlide, i, logTest: () => console.log('TEST SUCCEEDED') })
     }
     return child
   }))
