@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-// import React, { useState } from 'react'
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { Heading } from '@chakra-ui/react'
 import Slidedeck from '../components/tuts/Slidedeck'
@@ -25,7 +24,7 @@ export default function Template ({
 }) {
   const { markdownRemark } = data // data.markdownRemark holds md file data
   const { frontmatter, html } = markdownRemark
-  // console.log('frontmatter', frontmatter)
+  const [info, setInfo] = useState([])
 
   const slides = html.split('<Slide>').map(html => html.replaceAll('</Slide>', ''))
   slides.forEach(slide => console.log(slide))
@@ -33,34 +32,37 @@ export default function Template ({
   return (
     <div className='tutorial-container'>
       <div className='tutorial'>
-        <Heading mb={3} as='h2' size='xl'>{frontmatter.title}</Heading>
-        <h2>{frontmatter.date}</h2>
+        <Heading mb={3} as='h1' size='xl'>{frontmatter.title}</Heading>
+        <Heading mb={3} as='h2' size='lg'>{frontmatter.date}</Heading>
         <Slidedeck courseId={frontmatter.id}>
           {slides.map((slide, i) => {
             // const dialogue = getTagContents(slide, 'Dialogue').split('* ')
 
-            /** Parsed info tag from each slide */
-            const infoArray = getTagContents(slide, 'info').split('\n').map(str => str.trim()).filter(str => str !== '')
-            // infoArray: ['passed: true', ]
-            const info = {}
-            infoArray.forEach(value => {
-              const parts = value.split(': ')
-              const val = Boolean(parts[1])
-              console.log(parts[0], val)
-              info[parts[0]] = val
-            })
-            console.log('info', info)
-            console.log('keys', Object.keys(info))
-            console.log('pass', info.pass)
+            // Only add info to state if we haven't aded this slide yet
+            if (i > info.length) {
+              const infoArray = getTagContents(slide, 'info').split('\n').map(str => {
+                return str.trim()
+              }).filter(str => str !== '')
+
+              // infoArray: ['passed: true', ...]
+              const thisInfo = {}
+              infoArray.forEach(value => {
+                const parts = value.split(': ')
+                const val = Boolean(parts[1])
+                console.log(parts[0], val)
+                thisInfo[parts[0]] = val
+              })
+              setInfo([...info, thisInfo])
+            }
             return <MarkdownSlide
-            key={i}
-            pass={info.pass}
-            render={slideProps => {
-              // slideProps.logTest()
-              console.log('inside render', info)
-              console.log('slideProps', slideProps)
-              return <div>this is a TEST</div>
-            }}/>
+              key={i}
+              test='bruh'
+              render={slideProps => {
+                // slideProps.logTest()
+                console.log('info from render', info[i]) // {}
+                console.log('slideProps', slideProps)
+                return <div>YOOOOO</div>
+              }}/>
           })}
         </Slidedeck>
       </div>

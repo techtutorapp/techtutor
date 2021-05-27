@@ -1,7 +1,7 @@
 ---
 id: "test"
 slug: "/tutorial/test"
-title: "Test Tutorial"
+title: "Bologna Sandiwch"
 date: "2021-05-08"
 mode: "prod"
 ---
