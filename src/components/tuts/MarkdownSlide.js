@@ -8,7 +8,7 @@ const MarkdownSlide = (props) => {
       console.log('passed 😎')
     }
   })
-  console.log('inside mdslide', props)
+  // console.log('inside mdslide', props)
   return (<>
     {props.render(props)}
   </>

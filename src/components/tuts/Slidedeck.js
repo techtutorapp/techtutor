@@ -24,11 +24,11 @@ const window = css`
 //   }
 //   return chrome
 // })
-const AdaptiveHeader = () => {
-  return <ChromeLg />
-}
+// const AdaptiveHeader = () => {
+//   return <ChromeLg />
+// }
 
-const ChromeWithDetector = withResizeDetector(AdaptiveHeader)
+// const ChromeWithDetector = withResizeDetector(AdaptiveHeader)
 
 const Slidedeck = (props) => {
   const containerRef = useRef()
@@ -81,25 +81,23 @@ const Slidedeck = (props) => {
 
   return <>
     <Grid
-      h='90vh'
+      h='100%'
       templateRows='repeat(2, 1fr)'
       gap={2}
     >
       <GridItem
         mx='auto'
-        pt={1}
         bg='#DEE1E6'
         ref={containerRef}
-        height='min-content'
-        width='80%'
+        height='100%'
+        width='100%'
       >
-        <ChromeWithDetector />
-        <Box p='3' css={window} bg='#ffffff' height='60vh' border='1px solid #DEE1E6'>
+        <Box p='3' css={window} bg='#ffffff' height='90vh'>
           {slides[index]}
         </Box>
       </GridItem>
-      <GridItem mx='auto' p='3' align='right' width='80%'>
-        <ButtonGroup>
+      {/* <GridItem mx='auto' p='3' align='right' width='80%'>
+        {/* <ButtonGroup>
           <IconButton
             aria-label='Go back a slide'
             icon={<ArrowBackIcon/>}
@@ -113,8 +111,8 @@ const Slidedeck = (props) => {
             disabled={!(index < passed)}
             onClick={() => { shiftIndex(1) }}>
           </IconButton>
-        </ButtonGroup>
-      </GridItem>
+        </ButtonGroup> */}
+      {/* </GridItem>  */}
     </Grid>
   </>
 }
