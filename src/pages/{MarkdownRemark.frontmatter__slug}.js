@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
-import { Box, Grid, GridItem, Center, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Center, Text, Button } from '@chakra-ui/react'
 import Slidedeck from '../components/tuts/Slidedeck'
 import MarkdownSlide from '../components/tuts/MarkdownSlide'
 import Wooplet from '../svg/Wooplet'
@@ -30,17 +30,27 @@ export default function Template ({
   const [interactives, setInteractives] = useState([])
   const [dialogue, setDialogue] = useState([])
 
-  const slides = html.split('<Slide>').map(html => html.replaceAll('</Slide>', '')).filter(slide => slide.length > 0)
+  const slides = html.split('<Slide>').map(html => html?.replaceAll('</Slide>', '')).filter(slide => slide.length > 0)
+
+  const [indexes, setIndexes] = useState(slides.map(n => 0));
+
+  (async () => {
+    const { default: activities } = await import(`../tutorials/${frontmatter.interact}`)
+    if (interactives.length === 0) {
+      setInteractives([...activities])
+    }
+  })()
 
   return (
-    <Box key={interactives.toString()} className='tutorial-container' w='100%' h='100vh' p={3} overflow='hidden'>
+    <Box key={interactives.toString() + indexes.toString()} className='tutorial-container' w='100%' h='100vh' p={3} overflow='hidden'>
       <Box className='tutorial' w='100%' h='100%' m='auto'>
         <Slidedeck courseId={frontmatter.id}>
           {slides.map((slide, i) => {
             const scriptArr = getTagContents(slide, 'Dialogue').split('* ').map(s => s.trim()).filter(str => str !== '')
 
-            if (dialogue.length === 0 || i - 1 === dialogue.length) {
-              setDialogue([...dialogue, [...scriptArr]])
+            if (dialogue.length === 0 || dialogue.length < i) {
+              setDialogue(dialogue => [...dialogue, [...scriptArr]])
+              setIndexes(indexes => [...indexes, 0])
             }
 
             // Only add info to state if we haven't aded this slide yet
@@ -54,20 +64,10 @@ export default function Template ({
               infoArray.forEach(value => {
                 const parts = value.split(': ')
                 const val = Boolean(parts[1])
-                // console.log(parts[0], val)
                 thisInfo[parts[0]] = val
               })
               setInfo([...info, thisInfo])
             }
-
-            (async () => {
-              const { default: activities } = await import(`../tutorials/${frontmatter.interact}`)
-              if (interactives.length === 0) {
-                setInteractives([...activities])
-              }
-            })()
-
-            console.log('after loading components ', interactives)
 
             // Renders in the content container to the right
             return <MarkdownSlide
@@ -88,7 +88,28 @@ export default function Template ({
                       <GridItem colSpan={[6, 7, 7, 7]} bg='#96cf55'>
                         <Box id='interactive-container'>
                           {
-                            interactives[0]
+                            (() => {
+                              const updateDialogue = (i, index) => {
+                                const temp = [...indexes]
+                                temp[i] = index
+                                slideProps.setDialogue(i, index)
+                                setIndexes([...temp])
+                              }
+
+                              // Gives the interactive component access to all current props
+                              if (props.children) {
+                                const children = React.Children.map([props.children], (child, i) => {
+                                  if (React.isValidElement(child)) {
+                                    return React.cloneElement(child, { ...props, setDialogue: updateDialogue })
+                                  }
+                                  return child
+                                })
+                                // Ok this part is a little convoluted but it totally works
+                                const childProps = children[0].props // Extract newly generated props from child
+                                const { interact: renderInteractive } = childProps // Find render method from props
+                                return renderInteractive(children[0].props) // Call render method with props
+                              }
+                            })()
                           }
                         </Box>
                       </GridItem>
@@ -103,15 +124,19 @@ export default function Template ({
                         borderRadius='20'
                         >
                           <Text as='div' color='white' fontSize='4xl' p={5} textAlign='left'>
-                              {(() => {
-                                return <Typewriter words={[dialogue[i][0]]}></Typewriter>
-                              })()}
+                              {dialogue[i][indexes[i]] && <Typewriter words={[dialogue[i][indexes[i]]]}></Typewriter>}
+                              {indexes[i] === dialogue[i].length - 1 && <Button onClick={() => slideProps.passFn(i)} color='black'>Unlock</Button>}
+                              { }
                           </Text>
                       </Box>
                     </Center>
                   </Box>
                 )
-              }}/>
+              }}>
+                {
+                  interactives[i] !== undefined && interactives[i]
+                }
+              </MarkdownSlide>
           })}
         </Slidedeck>
       </Box>

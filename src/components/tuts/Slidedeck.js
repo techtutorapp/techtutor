@@ -3,32 +3,10 @@ import PropTypes from 'prop-types'
 import { Box, ButtonGroup, Grid, IconButton, GridItem } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { css } from '@emotion/react'
-import { withResizeDetector } from 'react-resize-detector'
-import ChromeLg from '../../svg/ChromeLg'
-// import ChromeMed from '../svg/ChromeMed'
 
 const window = css`
   border-radius: 0 0 10px 10px;
 `
-
-// Supposed to handle responsive header reandering but not working yet lol
-// const AdaptiveHeader = ({ width }) => {
-// useEffect(() => {
-//   let chrome = <ChromeLg />
-//   if (width >= 768) {
-//     chrome = <ChromeLg />
-//   } else if (width >= 480) {
-//     chrome = <ChromeMed />
-//   } else {
-//     chrome = <ChromeMed />
-//   }
-//   return chrome
-// })
-// const AdaptiveHeader = () => {
-//   return <ChromeLg />
-// }
-
-// const ChromeWithDetector = withResizeDetector(AdaptiveHeader)
 
 const Slidedeck = (props) => {
   const containerRef = useRef()
@@ -46,6 +24,30 @@ const Slidedeck = (props) => {
     }
   }
 
+  const indexes = []
+  for (let i = 0; i < props.children.length; i++) {
+    indexes.push(0)
+  }
+  const [dialogueIndexes, setDialogueIndex] = useState(indexes)
+
+  /**
+   * @param {number} i The index of the slide to query
+   * @returns The current index of the dialogue for the slide
+   */
+  function dialogueIndex (i) {
+    return dialogueIndexes[i]
+  }
+
+  /**
+   * @param {number} i The index of the slide to update
+   * @param {number} index The new index to move the dialogue to.
+   */
+  function setDialogue (i, index) {
+    const temp = [...dialogueIndexes]
+    temp[i] = index
+    setDialogueIndex([...temp])
+  }
+
   // Create state with current index and the slides which may have been changed
   const [slides, setSlides] = useState(React.Children.map(props.children, (child, i) => {
     /**
@@ -60,7 +62,7 @@ const Slidedeck = (props) => {
     }
 
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { passFn: passIndex, setSlide: setSlide, i, logTest: () => console.log('TEST SUCCEEDED') })
+      return React.cloneElement(child, { passFn: passIndex, setSlide: setSlide, i, dialogue: dialogueIndex(i), setDialogue })
     }
     return child
   }))
@@ -96,8 +98,8 @@ const Slidedeck = (props) => {
           {slides[index]}
         </Box>
       </GridItem>
-      {/* <GridItem mx='auto' p='3' align='right' width='80%'>
-        {/* <ButtonGroup>
+      <GridItem mx='auto' p='3' align='right' width='80%'>
+        <ButtonGroup>
           <IconButton
             aria-label='Go back a slide'
             icon={<ArrowBackIcon/>}
@@ -111,8 +113,8 @@ const Slidedeck = (props) => {
             disabled={!(index < passed)}
             onClick={() => { shiftIndex(1) }}>
           </IconButton>
-        </ButtonGroup> */}
-      {/* </GridItem>  */}
+        </ButtonGroup>
+      </GridItem>
     </Grid>
   </>
 }

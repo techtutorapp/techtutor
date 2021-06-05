@@ -14,17 +14,17 @@ interact: "tut0"
     <Title>This is the title of the slide</Title>
     <Dialogue>
         * Welcome to the tutorial!
-        * Can you click the button on the right side to pass?
+        * Click the button to unlock slide 2.
     </Dialogue>
 </Slide>
-<!-- <S lide>
+<Slide>
     <Info>
       avatar: true
       pass: false
     </Info>
     <Title>This is the title of this slightly different slide</Title>
     <Dialogue>
-        * Woohoo you did it
+        * Woohoo you did it!
         * Swag
     </Dialogue>
-</S lide> -->
+</Slide>

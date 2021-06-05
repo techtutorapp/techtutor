@@ -5,7 +5,7 @@ const MarkdownSlide = (props) => {
   useEffect(() => {
     if (props.passed) {
       props.passFn(props.i)
-      console.log('passed 😎')
+      alert('passed 😎')
     }
   })
   // console.log('inside mdslide', props)
