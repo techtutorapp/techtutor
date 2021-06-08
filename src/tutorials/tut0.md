@@ -13,8 +13,8 @@ interact: "tut0"
     </Info>
     <Title>This is the title of the slide</Title>
     <Dialogue>
-        * Welcome to the tutorial!
-        * Click the button to unlock slide 2.
+        * Welcome to the tutorial! Search for "bruh" in the search bar.
+        * Nice job! Click the button below to move on.
     </Dialogue>
 </Slide>
 <Slide>

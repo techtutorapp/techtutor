@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
-import { Box, Text, Button, AspectRatio, Flex, HStack, VStack, Spacer } from '@chakra-ui/react'
+import { Box, Text, AspectRatio, Flex, VStack } from '@chakra-ui/react'
 import Slidedeck from '../components/tuts/Slidedeck'
 import MarkdownSlide from '../components/tuts/MarkdownSlide'
 import Wooplet from '../svg/Wooplet'
 import Typewriter from '../components/tuts/util/Typewriter'
-import { ArrowRightIcon } from '@chakra-ui/icons'
 
 /**
  * Gets the contents of a specified tag from an HTML string
@@ -32,10 +31,8 @@ export default function Template ({
   const [interactives, setInteractives] = useState([])
   const [dialogue, setDialogue] = useState([])
 
-  const slides = html.split('<Slide>').map(content => content.replaceAll('</Slide>', '')).filter(slide => slide.length > 0)
-
-  const [indexes, setIndexes] = useState(slides.map(n => 0));
-
+  const slides = html.split('<Slide>').map(content => content.replaceAll('</Slide>', '')).filter(slide => slide.length > 0);
+  // const [indexes, setIndexes] = useState(slides.map(n => 0));
   (async () => {
     const { default: activities } = await import(`../tutorials/${frontmatter.interact}`)
     if (interactives.length === 0) {
@@ -54,7 +51,7 @@ export default function Template ({
 
   return (
     <AspectRatio
-      key={interactives.toString() + indexes.toString()}
+      key={interactives.toString()} // if doesn't work add indexes.toString()
       className='tutorial-container'
       h='100%'
       ratio={21 / 10}
@@ -66,7 +63,7 @@ export default function Template ({
 
           if (dialogue.length === 0 || dialogue.length < i) {
             setDialogue(dialogue => [...dialogue, [...scriptArr]])
-            setIndexes(indexes => [...indexes, 0])
+            // setIndexes(indexes => [...indexes, 0])
           }
 
           // Only add info to state if we haven't aded this slide yet
@@ -106,19 +103,8 @@ export default function Template ({
                         >
                           <Text as='div' color='white' fontSize='2xl' p={5} float='left'>
                           {
-                            dialogue[i][indexes[i]] &&
-                            <Typewriter words={[dialogue[i][indexes[i]]]}></Typewriter>
-                          }
-                          {
-                            indexes[i] === dialogue[i].length - 1 &&
-                            <Button
-                              onClick={() => {
-                                console.log('propi', props.i)
-                                props.passFn(props.i)
-                              }}
-                              color='black'>
-                                Unlock
-                              </Button>
+                            dialogue[i][props.dialogue] &&
+                            <Typewriter words={[dialogue[i][props.dialogue]]}></Typewriter>
                           }
                         </Text>
                       </Box>
@@ -129,14 +115,11 @@ export default function Template ({
                           <Box flex={3} bgColor='#FF8462' borderTopLeftRadius={10}></Box>
                           <Box flex={12} bgColor='#E4E4E4' borderTopRadius={10}></Box>
                       </Flex>
-                      <Box w='100%' h='100%' p={3}>
+                      <Box w='100%' h='94%'>
                       {
                           (() => {
                             const updateDialogue = (i, index) => {
-                              const temp = [...indexes]
-                              temp[i] = index
-                              slideProps.setDialogue(i, index)
-                              setIndexes([...temp])
+                              props.setDialogue(i, index)
                             }
 
                             // Gives the interactive component access to all current props
@@ -156,22 +139,6 @@ export default function Template ({
                       </Box>
                     </Box>
                   </Flex>
-                  <Box w='100%' pr={5} pb='2'>
-                    <Button
-                      float='right'
-                      bgColor='#FF8462'
-                      color='white'
-                      // disabled={!(props.i < props.passed)}
-                      onClick={() => {
-                        props.nextSlide()
-                      }}>
-                        <HStack>
-                          <p>Next</p>
-                          <Spacer/>
-                          <ArrowRightIcon/>
-                        </HStack>
-                      </Button>
-                  </Box>
                 </VStack>)
             }}>
               {
