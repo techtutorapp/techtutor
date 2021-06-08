@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 function Typewriter ({ words }) {
   const [index, setIndex] = useState(0)
   const [subIndex, setSubIndex] = useState(0)
-  const [blink, setBlink] = useState(true)
   const [reverse, setReverse] = useState(false)
 
   useEffect(() => {
@@ -31,15 +30,8 @@ function Typewriter ({ words }) {
     return () => clearTimeout(timeout)
   }, [subIndex, index, reverse])
 
-  useEffect(() => {
-    const timeout2 = setTimeout(() => {
-      setBlink((prev) => !prev)
-    }, 400)
-    return () => clearTimeout(timeout2)
-  }, [blink])
-
   return (
-    <Text>{`${words[index].substring(0, subIndex)}${blink ? '|' : ' '}`}</Text>
+    <Text>{words[index].substring(0, subIndex)}</Text>
   )
 }
 

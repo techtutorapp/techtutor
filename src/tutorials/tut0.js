@@ -3,8 +3,20 @@ import { Button } from '@chakra-ui/button'
 import Interactive from '../components/tuts/Interactive'
 import { Heading } from '@chakra-ui/layout'
 
+/**
+children: {$$typeof: Symbol(react.element), key: null, ref: null, props: {…}, type: ƒ, …}
+dialogue: 0
+i: 0
+interact: ƒ interact(props)
+passFn: ƒ passIndex(i)
+render: ƒ render(slideProps)
+setDialogue: ƒ updateDialogue(i, index)
+setSlide: ƒ setSlide(index, slide)
+test: "bruh"
+*/
+
 const Slide1 = <Interactive interact={props => {
-  console.log(props)
+  console.log('prop!!!!', props)
   return <>
       <Heading as='h1' size='xl'>Just click on the button to move on!</Heading>
       <Button onClick={() => {

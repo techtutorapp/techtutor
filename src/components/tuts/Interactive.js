@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function Interactive (props) {
-  console.log(props)
-  // return <>{props.render(props)}</>
-  return <>hi</>
+  return <>{props.interact(props)}</>
 }
 
 Interactive.propTypes = {

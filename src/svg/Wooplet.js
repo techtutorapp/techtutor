@@ -1,22 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import standard from './standard.svg' // tells webpack JS will reference file
+import { Image } from '@chakra-ui/image'
 
 // console.log(standard)
 
 const Wooplet = (props) => {
   if (props.type === 'standard') {
-    return <img
+    return <Image
       src={standard}
-      height={props.h ?? '100%'}
-      width={props.w ?? '100%'}
+      {...props}
       alt='Wooplet Avatar'
     />
   }
-  return <img
+  return <Image
     src={standard}
-    height={props.h ?? '100%'}
-    width={props.w ?? '100%'}
+    {...props}
     alt='Wooplet Avatar'
   />
 }
