@@ -31,12 +31,7 @@ export default function Template ({
   const [interactives, setInteractives] = useState([])
   const [dialogue, setDialogue] = useState([])
 
-  const slides = html.split('<Slide>').map(content => {
-    if (content) {
-      return content.replaceAll('</Slide>', '')
-    }
-    return ''
-  }).filter(slide => slide.length > 0)
+  const slides = html.split('<Slide>').map(content => content.replace(/<\/Slide>/g, '')).filter(slide => slide.length > 0)
 
   if (interactives.length === 0) {
     const { default: activities } = require(`../tutorials/${frontmatter.interact}.js`)
