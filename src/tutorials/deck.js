@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Formik, Form, Field } from 'formik'
 import { Button, FormControl, FormHelperText, FormLabel, Heading, Input } from '@chakra-ui/react'
 
-import Slidedeck from '../../src/components/tuts/Slidedeck'
-import Slide from '../../src/components/tuts/Slide'
+import Slidedeck from '../components/tuts/Slidedeck'
+import Slide from '../components/tuts/Slide'
 
 /* HOW TO USE SLIDE PROPS & SLIDE UTILITY FUNCTIONS
  *

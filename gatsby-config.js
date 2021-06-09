@@ -10,6 +10,7 @@ module.exports = {
         path: path.join(__dirname, '/src/tutorials')
       }
     },
-    'gatsby-transformer-remark'
+    'gatsby-transformer-remark',
+    'gatsby-plugin-loadable-components-ssr'
   ]
 }

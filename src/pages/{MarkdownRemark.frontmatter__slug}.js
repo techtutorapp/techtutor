@@ -31,14 +31,17 @@ export default function Template ({
   const [interactives, setInteractives] = useState([])
   const [dialogue, setDialogue] = useState([])
 
-  const slides = html.split('<Slide>').map(content => content.replaceAll('</Slide>', '')).filter(slide => slide.length > 0);
-  // const [indexes, setIndexes] = useState(slides.map(n => 0));
-  (async () => {
-    const { default: activities } = await import(`../tutorials/${frontmatter.interact}`)
-    if (interactives.length === 0) {
-      setInteractives([...activities])
+  const slides = html.split('<Slide>').map(content => {
+    if (content) {
+      return content.replaceAll('</Slide>', '')
     }
-  })()
+    return ''
+  }).filter(slide => slide.length > 0)
+
+  if (interactives.length === 0) {
+    const { default: activities } = require(`../tutorials/${frontmatter.interact}.js`)
+    setInteractives([...activities])
+  }
 
   useEffect(() => {
     if (window) {
@@ -46,8 +49,7 @@ export default function Template ({
       window.addEventListener('beforeunload', alertUser)
       return () => window.removeEventListener('beforeunload', alertUser)
     }
-  },
-  [window])
+  })
 
   return (
     <AspectRatio

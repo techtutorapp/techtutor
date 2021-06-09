@@ -75,8 +75,6 @@ const Slidedeck = (props) => {
       setIndex(index + n)
     }
   }
-  console.log(index)
-  console.log(pass)
 
   return <Flex flexDir='column' bgColor='#474953' h='100%' w='100%'>
     {slides[index]}
