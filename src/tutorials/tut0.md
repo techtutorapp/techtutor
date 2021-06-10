@@ -26,5 +26,13 @@ interact: "tut0"
     <Dialogue>
         * Woohoo you did it!
         * Swag
+        * Very cool
+        * oh yeahhhh
+        * nice
+        * rad
+        * epic
+        * nice nice nice nice
+        * ok last one
+        * just kidding
     </Dialogue>
 </Slide>

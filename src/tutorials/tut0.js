@@ -2,18 +2,6 @@ import React from 'react'
 import Interactive from '../components/tuts/Interactive'
 import { Input, Heading, VStack, Button } from '@chakra-ui/react'
 
-/**
-children: {$$typeof: Symbol(react.element), key: null, ref: null, props: {…}, type: ƒ, …}
-dialogue: 0
-i: 0
-interact: ƒ interact(props)
-passFn: ƒ passIndex(i)
-render: ƒ render(slideProps)
-setDialogue: ƒ updateDialogue(i, index)
-setSlide: ƒ setSlide(index, slide)
-test: "bruh"
-*/
-
 const Slide1 = <Interactive interact={props => {
   const [value, setValue] = React.useState('')
   const handleChange = (e) => setValue(e.target.value)
@@ -53,7 +41,7 @@ const Slide2 = <Interactive interact={props => {
       if (props.dialogue + 1 < props.dialogueArray.length) {
         props.setDialogue(props.i, props.dialogue + 1)
       }
-    }}>Another thing</Button>
+    }}>Bump dialogue</Button>
   </>
 }}/>
 

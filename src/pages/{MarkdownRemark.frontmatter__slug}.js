@@ -25,7 +25,7 @@ export default function Template ({
   data,
   navigation // this prop will be injected by the GraphQL query below.
 }) {
-  const { markdownRemark } = data // data.markdownRemark holds md file data
+  const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
   const [info, setInfo] = useState([])
   const [interactives, setInteractives] = useState([])
@@ -48,11 +48,12 @@ export default function Template ({
 
   return (
     <AspectRatio
-      key={interactives.toString()} // if doesn't work add indexes.toString()
+      key={interactives.toString()}
       className='tutorial-container'
-      h='100%'
-      ratio={21 / 10}
+      w='100%'
+      ratio={21 / 10.5}
       overflow='hidden'
+      height='fit-content'
     >
       <Slidedeck courseId={frontmatter.id}>
         {slides.map((slide, i) => {
@@ -86,13 +87,14 @@ export default function Template ({
             render={slideProps => {
               const props = { ...slideProps, ...info[i] }
               return (
-                <VStack bgColor='#474953' h='100%' w='100%'>
-                  <Flex w='100%' h='90%' p={5}>
+                <VStack bgColor='#474953' h='85%' w='100%'>
+                  <Flex w='100%' h='100%' p={5}>
                     <Box flex={5}>
                       <Flex flexDir='column' h='100%'>
                         <Wooplet flex={7} w='35%' m='auto'/>
                         <Box
                           w='90%'
+                          maxH='100%'
                           flex={5}
                           m='auto'
                           bgColor='blackAlpha.600'
@@ -107,7 +109,7 @@ export default function Template ({
                       </Box>
                       </Flex>
                     </Box>
-                    <Box id='interactive-container' flex={7} borderRadius={10} bgColor='white'>
+                    <Box id='interactive-container' flex={7} h='100%' borderRadius={10} bgColor='white'>
                       <Flex w='100%' h='6%' borderTopRadius={10}>
                           <Box flex={3} bgColor='#FF8462' borderTopLeftRadius={10}></Box>
                           <Box flex={12} bgColor='#E4E4E4' borderTopRadius={10}></Box>
@@ -123,7 +125,11 @@ export default function Template ({
                             if (props.children) {
                               const children = React.Children.map([props.children], (child, i) => {
                                 if (React.isValidElement(child)) {
-                                  return React.cloneElement(child, { ...props, setDialogue: updateDialogue })
+                                  return React.cloneElement(child, {
+                                    ...props,
+                                    setDialogue: updateDialogue,
+                                    dialogueArray: dialogue[props.i]
+                                  })
                                 }
                                 return child
                               })

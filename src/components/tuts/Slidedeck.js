@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Flex, HStack, Spacer } from '@chakra-ui/layout'
-import { Button } from '@chakra-ui/react'
+import { Button, Box } from '@chakra-ui/react'
 import { ArrowRightIcon } from '@chakra-ui/icons'
+import '../../css/tut.css'
 
 const Slidedeck = (props) => {
   const [pass, setPass] = useState(-1)
@@ -77,20 +78,23 @@ const Slidedeck = (props) => {
 
   return <Flex flexDir='column' bgColor='#474953' h='100%' w='100%'>
     {slides[index]}
-    <Button
-      float='right'
-      bgColor='#FF8462'
-      color='white'
-      disabled={index !== pass}
-      onClick={() => {
-        shiftIndex(1)
-      }}>
-        <HStack>
-          <p>Next</p>
-          <Spacer/>
-          <ArrowRightIcon/>
-        </HStack>
-      </Button>
+    <Box w='100%' py={1} pr={6}>
+      <Button
+        float='right'
+        bgColor='#FF8462'
+        color='white'
+        disabled={index !== pass}
+        fontSize='1.4rem'
+        onClick={() => {
+          shiftIndex(1)
+        }}>
+          <HStack>
+            <p>Next</p>
+            <Spacer/>
+            <ArrowRightIcon/>
+          </HStack>
+        </Button>
+    </Box>
   </Flex>
 }
 
