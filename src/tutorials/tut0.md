@@ -24,8 +24,8 @@ interact: "tut0"
     </Info>
     <Title>This is the title of this slightly different slide</Title>
     <Dialogue>
-        * Woohoo you did it!
-        * Swag
+        * Woohoo you did it! Now search for "hello"
+        * Swag, you did it!
         * Very cool
         * oh yeahhhh
         * nice
@@ -34,5 +34,6 @@ interact: "tut0"
         * nice nice nice nice
         * ok last one
         * just kidding
+        * ok now we're done
     </Dialogue>
 </Slide>

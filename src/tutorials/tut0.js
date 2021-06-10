@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import Interactive from '../components/tuts/Interactive'
 import { Input, Heading, VStack, Button } from '@chakra-ui/react'
 
-const Slide1 = <Interactive interact={props => {
+const Google = props => {
   const [value, setValue] = React.useState('')
   const handleChange = (e) => setValue(e.target.value)
   return <>
@@ -19,30 +20,28 @@ const Slide1 = <Interactive interact={props => {
           size="md"
         />
         <Button onClick={() => {
-          if (value.match(/bruh/) && props.dialogue + 1 < props.dialogueArray.length) {
+          if (value.match(props.validator) && props.dialogue + 1 < props.dialogueArray.length) {
             // kinda sketchy rn-- don't have a way of detecting when we're out of dialogue
             // to iterate through. Will have to store dialogue in Slidedeck state somehow
             // which is not ideal but I think it's the only option.
             props.setDialogue(props.i, props.dialogue + 1)
-            props.setPass(props.i)
+            if (!props.lastSlide) {
+              props.setPass(props.i)
+            }
           } else {
-            alert('bruh, something isn\'t right')
+            alert('Hmm... something isn\'t right. Try again?')
           }
         }}>Search</Button>
       </VStack>
   </>
+}
+
+const Slide1 = <Interactive interact={props => {
+  return <Google {...props} validator='bruh'></Google>
 }}/>
 
 const Slide2 = <Interactive interact={props => {
-  return <>
-    <div>This is also working! yay!</div>
-    <Button onClick={() => {
-      // How to prevent multi-inputs causing an IndexOutOfBound for dialogue
-      if (props.dialogue + 1 < props.dialogueArray.length) {
-        props.setDialogue(props.i, props.dialogue + 1)
-      }
-    }}>Bump dialogue</Button>
-  </>
+  return <Google {...props} validator='hello' lastSlide></Google>
 }}/>
 
 const deck = [
