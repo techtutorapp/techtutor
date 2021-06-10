@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/layout'
 import React from 'react'
-import Tutorial from '../tutorials/store/tut0/deck'
+import Tutorial from '../tutorials/deck'
 
 const Test = props => {
   return (
