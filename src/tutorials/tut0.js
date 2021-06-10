@@ -31,7 +31,7 @@ const Slide1 = <Interactive interact={props => {
           size="md"
         />
         <Button onClick={() => {
-          if (value.match(/bruh/)) {
+          if (value.match(/bruh/) && props.dialogue + 1 < props.dialogueArray.length) {
             // kinda sketchy rn-- don't have a way of detecting when we're out of dialogue
             // to iterate through. Will have to store dialogue in Slidedeck state somehow
             // which is not ideal but I think it's the only option.
@@ -48,7 +48,12 @@ const Slide1 = <Interactive interact={props => {
 const Slide2 = <Interactive interact={props => {
   return <>
     <div>This is also working! yay!</div>
-    <Button onClick={() => props.setDialogue(props.i, props.dialogue + 1)}>Another thing</Button>
+    <Button onClick={() => {
+      // How to prevent multi-inputs causing an IndexOutOfBound for dialogue
+      if (props.dialogue + 1 < props.dialogueArray.length) {
+        props.setDialogue(props.i, props.dialogue + 1)
+      }
+    }}>Another thing</Button>
   </>
 }}/>
 

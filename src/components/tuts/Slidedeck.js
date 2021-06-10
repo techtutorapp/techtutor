@@ -25,7 +25,6 @@ const Slidedeck = (props) => {
    * @param {number} index The new index to move the dialogue to.
    */
   function setDialogue (i, index) {
-    console.log('sdf reporting for duty')
     const temp = [...dialogueIndexes]
     temp[i] = index
     setDialogueIndex([...temp])
