@@ -53,7 +53,7 @@ const Slidedeck = (props) => {
     setSlides(clone)
   }
 
-  // Create state with current index and the slides which may have been changed
+  // Create state with current index and the slides which may have been updated dynamically
 
   const [slides, setSlides] = useState(React.Children.map(props.children, (child, i) => {
     if (React.isValidElement(child)) {

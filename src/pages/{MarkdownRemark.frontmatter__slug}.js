@@ -27,7 +27,7 @@ export default function Template ({
 }) {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
-  const [info, setInfo] = useState([])
+  // const [info, setInfo] = useState([])
   const [interactives, setInteractives] = useState([])
   const [dialogue, setDialogue] = useState([])
 
@@ -65,27 +65,27 @@ export default function Template ({
           }
 
           // Only add info to state if we haven't aded this slide yet
-          if (info.length === 0 || i - 1 === info.length) {
-            const infoArray = getTagContents(slide, 'info').split('\n').map(str => {
-              return str.trim()
-            }).filter(str => str !== '')
+          // if (info.length === 0 || i - 1 === info.length) {
+          //   const infoArray = getTagContents(slide, 'info').split('\n').map(str => {
+          //     return str.trim()
+          //   }).filter(str => str !== '')
 
-            // infoArray: ['passed: true', ...]
-            const thisInfo = {}
-            infoArray.forEach(value => {
-              const parts = value.split(': ')
-              const val = Boolean(parts[1])
-              thisInfo[parts[0]] = val
-            })
-            setInfo([...info, thisInfo])
-          }
+          //   // infoArray: ['passed: true', ...]
+          //   const thisInfo = {}
+          //   infoArray.forEach(value => {
+          //     const parts = value.split(': ')
+          //     const val = Boolean(parts[1])
+          //     thisInfo[parts[0]] = val
+          //   })
+          //   setInfo([...info, thisInfo])
+          // }
 
           // Renders in the content container to the right
           return <MarkdownSlide
             key={i}
             test='bruh'
             render={slideProps => {
-              const props = { ...slideProps, ...info[i] }
+              const props = { ...slideProps }
               return (
                 <VStack bgColor='#474953' h='85%' w='100%'>
                   <Flex w='100%' h='100%' p={5}>
