@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import {
   Button,
   Flex,
   Heading,
-  Image,
   Stack,
   Text,
   Box,
@@ -30,6 +28,7 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import Wooplet from '../svg/Wooplet'
 
 const SocialButton = ({
   children,
@@ -177,13 +176,11 @@ export default function SplitScreen () {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Image
-          alt={'Login Image'}
-          objectFit={'cover'}
-          src={
-            'https://media.discordapp.net/attachments/310544972728238080/818550874510458900/robot_thang_1_bigg.png?width=528&height=683'
-          }
-        />
+        <Wooplet
+          alt='Login Image'
+          objectFit='cover'
+          w='45%'
+          m='auto'/>
       </Flex>
     </Stack>
     {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -377,9 +374,9 @@ const NAV_ITEMS = [
     label: 'Courses',
     children: [
       {
-        label: 'Course 1',
-        subLabel: 'Description',
-        href: '#'
+        label: 'Searching the Web',
+        subLabel: 'Learn to explore the internet, starting with your search engine!',
+        href: '/tut/how-to-search'
       },
       {
         label: 'Course 2',

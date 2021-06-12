@@ -1,4 +1,7 @@
-html {
+.tutorial-container {
   padding: 0.7em;
+}
+
+html {
   background-color: #272932;
 }
