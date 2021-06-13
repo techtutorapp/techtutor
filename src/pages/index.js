@@ -176,11 +176,7 @@ export default function SplitScreen () {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Wooplet
-          alt='Login Image'
-          objectFit='cover'
-          w='45%'
-          m='auto'/>
+        <Wooplet type='index'/>
       </Flex>
     </Stack>
     {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

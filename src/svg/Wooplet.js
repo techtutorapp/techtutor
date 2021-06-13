@@ -14,6 +14,17 @@ const Wooplet = (props) => {
           alt='Wooplet Avatar'
         />
       </Box>
+  } else if (props.type === 'index') {
+    return <Box
+      objectFit='cover'
+      w='45%'
+      m='auto'>
+        <StaticImage
+          placeholder='tracedSVG'
+          src='./standard.svg'
+          alt='Wooplet Avatar'
+        />
+      </Box>
   }
   return <Box flex={6} w='35%' m='auto'>
       <StaticImage
