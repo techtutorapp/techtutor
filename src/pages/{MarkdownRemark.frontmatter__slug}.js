@@ -91,7 +91,7 @@ export default function Template ({
                   <Flex w='100%' h='100%' p={5}>
                     <Box flex={5}>
                       <Flex flexDir='column' h='100%'>
-                        <Wooplet flex={7} w='35%' m='auto'/>
+                        <Wooplet/>
                         <Box
                           w='90%'
                           maxH='100%'

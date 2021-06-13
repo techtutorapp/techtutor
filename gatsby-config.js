@@ -11,6 +11,9 @@ module.exports = {
       }
     },
     'gatsby-transformer-remark',
-    'gatsby-plugin-loadable-components-ssr'
+    'gatsby-plugin-loadable-components-ssr',
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp'
   ]
 }
