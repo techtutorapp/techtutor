@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Interactive from '../components/tuts/Interactive'
 import { SearchIcon } from '@chakra-ui/icons'
-import RedBackpack from './assets/Red_Backpack.png'
+import RedBackpack from '../assets/Red_Backpack.png'
 import {
   Box,
   Input,

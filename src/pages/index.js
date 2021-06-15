@@ -66,7 +66,7 @@ SocialButton.propTypes = {
 export default function SplitScreen () {
   const { isOpen, onToggle } = useDisclosure()
   return (
-    <React.Fragment>
+    <>
       <Box>
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
@@ -207,7 +207,7 @@ export default function SplitScreen () {
         </Stack>
       </Container>
     </Box>
-    </React.Fragment>
+    </>
   )
 }
 
@@ -372,17 +372,26 @@ const NAV_ITEMS = [
       {
         label: 'Searching the Web',
         subLabel: 'Learn to explore the internet, starting with your search engine!',
-        href: '/tut/how-to-search'
+        href: '/tut/how-to-search',
+        image: 'WoogleScreenshot.png'
       },
       {
-        label: 'Course 2',
-        subLabel: 'Description',
-        href: '#'
+        label: 'Get to know Chrome',
+        subLabel: 'Coming soon!',
+        href: '#',
+        image: ''
       },
       {
-        label: 'Course 3',
-        subLabel: 'Description',
-        href: '#'
+        label: 'Online Safety',
+        subLabel: 'Coming soon!',
+        href: '#',
+        image: ''
+      },
+      {
+        label: 'How to Email',
+        subLabel: 'Coming soon!',
+        href: '#',
+        image: ''
       }
     ]
   },
@@ -391,3 +400,5 @@ const NAV_ITEMS = [
     href: '#'
   }
 ]
+const courses = NAV_ITEMS[0].children
+export { courses }
