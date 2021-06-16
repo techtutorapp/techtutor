@@ -368,6 +368,7 @@ MobileNavItem.propTypes = {
 const NAV_ITEMS = [
   {
     label: 'Courses',
+    href: '/courses',
     children: [
       {
         label: 'Searching the Web',
