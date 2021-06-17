@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react'
+import { navigate } from 'gatsby'
 import Interactive from '../components/tuts/Interactive'
 import { SearchIcon } from '@chakra-ui/icons'
 import RedBackpack from '../assets/Red_Backpack.png'
@@ -28,7 +29,10 @@ import {
   ModalHeader,
   ModalFooter,
   useDisclosure,
-  HStack
+  HStack,
+  useTimeout,
+  ModalBody,
+  ModalCloseButton
 } from '@chakra-ui/react'
 
 const Google = props => {
@@ -189,7 +193,29 @@ const Slide7 = <Interactive interact={props => {
 }}/>
 
 const Slide8 = <Interactive interact={props => {
-  return <Box w='100%' h='100%' position='relative'>
+  const { isOpen, onOpen } = useDisclosure()
+  useTimeout(onOpen, 7000)
+  return <>
+    <Modal isOpen={isOpen}>
+      <ModalOverlay/>
+      <ModalContent>
+        <ModalHeader>Thanks for finishing the tutorial! ✅</ModalHeader>
+        <ModalBody>
+          Want to learn more? We have a great tutorial on Advanced Google Search!
+        </ModalBody>
+        <ModalFooter>
+          <HStack spacing={2}>
+            <Button onClick={() => navigate('/courses')} color='white' bgColor='#FF8562' _hover={{ backgroundColor: '#FFAD97' }}>
+              Check it out!
+            </Button>
+            <Button onClick={() => navigate('/')}>
+              Return to Homepage
+            </Button>
+          </HStack>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+    <Box w='100%' h='100%' position='relative'>
       <HStack
         zIndex='overlay'
         position='absolute'
@@ -206,6 +232,7 @@ const Slide8 = <Interactive interact={props => {
     </HStack>
     <Google {...props} validator='alfkjsldkfjslkdjf'/>
   </Box>
+  </>
 }}/>
 
 const deck = [
