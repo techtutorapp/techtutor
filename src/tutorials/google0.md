@@ -29,7 +29,7 @@ interact: "google0"
 </Slide>
 <Slide>
   <Dialogue>
-    * You're pretty good at this! Let's see what else you can do.
+    * You're pretty good at this! Let's try something else.
   </Dialogue>
 </Slide>
 <Slide>
