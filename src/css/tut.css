@@ -5,3 +5,19 @@
 html {
   background-color: #272932;
 }
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 10px #ff6b42;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff6b42;
+  }
+  100% {
+    box-shadow: 0 0 10px #ff6b42;
+  }
+}
+
+.next-button {
+  animation: glowing 800ms infinite;
+}

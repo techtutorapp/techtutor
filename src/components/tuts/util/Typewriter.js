@@ -1,6 +1,7 @@
 import { Text } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import '@fontsource/pt-sans'
 
 function Typewriter ({ words }) {
   const [index, setIndex] = useState(0)
@@ -31,7 +32,7 @@ function Typewriter ({ words }) {
   }, [subIndex, index, reverse])
 
   return (
-    <Text>{words[index].substring(0, subIndex)}</Text>
+    <Text fontFamily='PT Sans'>{words[index].substring(0, subIndex)}</Text>
   )
 }
 

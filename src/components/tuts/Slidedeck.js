@@ -1,17 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Flex, HStack, Spacer } from '@chakra-ui/layout'
-import { Button, Box } from '@chakra-ui/react'
+import { Button, Box, Popover, PopoverArrow, PopoverContent, PopoverTrigger, PopoverBody } from '@chakra-ui/react'
 import { ArrowRightIcon } from '@chakra-ui/icons'
 import '../../css/tut.css'
 
 const Slidedeck = (props) => {
-  const [pass, setPass] = useState(-1)
+  // Current slide index
+  const [index, setIndex] = useState(0)
+  const [bump, setBump] = useState(false)
+  const [pass, updatePass] = useState(-1)
+  const nextButton = useRef()
+
   const indexes = []
   for (let i = 0; i < props.children.length; i++) {
     indexes.push(0)
   }
   const [dialogueIndexes, setDialogueIndex] = useState(indexes)
+
+  const setPass = (i) => {
+    updatePass(i)
+    setTimeout(() => {
+      if (i === index) {
+        setBump(true)
+      }
+    }, 10000)
+  }
 
   /**
    * @param {number} i The index of the slide to query
@@ -62,9 +76,6 @@ const Slidedeck = (props) => {
     return child
   }))
 
-  // Current slide index
-  const [index, setIndex] = useState(0)
-
   /**
    * Moves index in slides array by n steps.
    * @param {number} n Step amount (1 for forward, -1 for backward)
@@ -78,22 +89,39 @@ const Slidedeck = (props) => {
 
   return <Flex flexDir='column' bgColor='#474953' h='100%' w='100%'>
     {slides[index]}
-    <Box w='100%' py={1} pr={6}>
-      <Button
-        float='right'
-        bgColor='#FF8462'
-        color='white'
-        disabled={index !== pass}
-        fontSize='1.4rem'
-        onClick={() => {
-          shiftIndex(1)
-        }}>
-          <HStack>
-            <p>Next</p>
-            <Spacer/>
-            <ArrowRightIcon/>
-          </HStack>
-        </Button>
+    <Box w='100%' d='flex' pt='2' justifyContent='center'>
+      <Popover
+        initialFocusRef={nextButton}
+        isOpen={index === 0 || (bump && pass === index)}
+        placement='right-end'>
+        <PopoverTrigger>
+          <Button
+            ref={nextButton}
+            className={index === pass ? 'next-button' : ''}
+            bgColor='#FF8462'
+            color='white'
+            disabled={index !== pass}
+            fontSize='1.4rem'
+            _hover={{ backgroundColor: '#FFAD97' }}
+            onClick={() => {
+              shiftIndex(1)
+              setBump(false)
+            }}>
+            <HStack>
+              <p>Next</p>
+              <Spacer/>
+              <ArrowRightIcon/>
+            </HStack>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          width='fit-content'>
+          <PopoverArrow/>
+          <PopoverBody>
+            <strong>Click here to move on!</strong>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
     </Box>
   </Flex>
 }

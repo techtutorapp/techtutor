@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^1.0.2",
@@ -15,6 +16,7 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@fontsource/arvo": "^4.4.5",
+    "@fontsource/pt-sans": "^4.4.5",
     "@fontsource/zilla-slab": "^4.4.5",
     "formik": "^2.2.6",
     "framer-motion": "^4.1.3",
