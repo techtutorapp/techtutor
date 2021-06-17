@@ -216,7 +216,6 @@ const Slide8 = <Interactive interact={props => {
     </Modal>
     <Box w='100%' h='100%' position='relative'>
       <HStack
-        zIndex='overlay'
         position='absolute'
         bottom='2%'
         left='0'

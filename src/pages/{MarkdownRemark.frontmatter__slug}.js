@@ -61,24 +61,7 @@ export default function Template ({
 
           if (dialogue.length === 0 || dialogue.length < i) {
             setDialogue(dialogue => [...dialogue, [...scriptArr]])
-            // setIndexes(indexes => [...indexes, 0])
           }
-
-          // Only add info to state if we haven't aded this slide yet
-          // if (info.length === 0 || i - 1 === info.length) {
-          //   const infoArray = getTagContents(slide, 'info').split('\n').map(str => {
-          //     return str.trim()
-          //   }).filter(str => str !== '')
-
-          //   // infoArray: ['passed: true', ...]
-          //   const thisInfo = {}
-          //   infoArray.forEach(value => {
-          //     const parts = value.split(': ')
-          //     const val = Boolean(parts[1])
-          //     thisInfo[parts[0]] = val
-          //   })
-          //   setInfo([...info, thisInfo])
-          // }
 
           // Renders in the content container to the right
           return <MarkdownSlide
