@@ -31,8 +31,7 @@ import {
   useDisclosure,
   HStack,
   useTimeout,
-  ModalBody,
-  ModalCloseButton
+  ModalBody
 } from '@chakra-ui/react'
 
 const Google = props => {

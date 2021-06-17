@@ -17,7 +17,7 @@ const Wooplet = (props) => {
   } else if (props.type === 'index') {
     return <Box
       objectFit='cover'
-      w='45%'
+      w='40%'
       m='auto'>
         <StaticImage
           placeholder='tracedSVG'
